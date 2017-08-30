@@ -10,6 +10,7 @@ tasks relating from the peer, tracker and messages. It follows a flow of directi
 handler, where as it will download from multiple peers. In addition, if one wants to pause the
 download simply input “quit” in the terminal or close the window itself. If one wants to continue
 the download, one simply reruns the program
+
 LAYOUT:
 First, TorrentHandler decodes the information from the torrent file using “GivenTools”
 package. Once decoded it creates a Tracker object from the extracted info, a buffer to hold
@@ -26,6 +27,7 @@ up to it. In order to successfully download from multiple peers, we included a m
 track of each piece to avoid collision. Once the download is complete, TorrentHandler lets the
 Peer disconnect, uses Writer to write the file in its entirety, and then uses Tracker to announce
 the completion and subsequent stop.
+
 CLASSES:
 RUBTClient.java (main file):
 This creates the TorrentHandler, from the shell arguments, which is in charge of operating the
@@ -39,6 +41,7 @@ interface to communicate to the TorrentHandler,known as a PeerDelegate. This int
 link between Peer and TorrentHandler, therefore it allows the TorrentHandler to verify pieces
 upon each successful receive, as well as closing the client once completed.
 TorrentHandler.java:
+
 This is an abstract overview of the torrent connection. Given a path to a .torrent file, it’s in
 charge of basically monitoring the entire download operation. It will decode the torrent file using
 the provided tools, create a Tracker instance to communicate with the tracker, and create the
@@ -48,6 +51,7 @@ and contacts the tracker to notify that the piece is successfully downloaded.
 Tracker.java
 This class used to communicate with the tracker and the torrentHandler, it does do by creating an
 instance of this object by using the information extracted from the torrent file. The object is in
+
 charge of building the announce URL, opening a URLConnection, and then extracting the
 trackers response into a map. The TorrentHandler also uses this class to initiate communication
 with the tracker, as well as terminate, by notifying the tracker that file is completed.
@@ -57,6 +61,7 @@ to encode and decode peer messages. Encoding is done by constructing a byte arra
 type of Message we want (HAVE, PIECE, UNCHOKE, etc.) and the “payload” array (referred to
 as “tail” in the code). Whereas, decoding is done by creating a MessageData object using the
 types defined here and then reading from MessageData members.
+
 ListenerServer.java:
 This class is an abstract view of the uploading process. It consists of various methods for
 receiving incoming connections between incoming peers. This class with the conjuction with the
